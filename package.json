@@ -1,0 +1,15 @@
+{
+  "name": "riman",
+  "version": "1.0.0",
+  "description": "comprueba si dos palabras en español riman y te da infromación sobre ellas.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "miggy97",
+  "license": "ISC",
+  "dependencies": {
+    "rimador": "^1.2.0",
+    "silabea": "^1.0.0"
+  }
+}
