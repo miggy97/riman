@@ -61,7 +61,7 @@ const riman = require("riman");
 console.log(riman.analyzeWord("alienígena"));
 ```
 
-## Result 1
+## Result 2
 
 ```js
 {
