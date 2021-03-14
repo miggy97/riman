@@ -56,7 +56,7 @@ console.log(riman.analyze('programación', 'automatización'));
 
 > **riman:** `boolean`  identify whether the two words entered rhyme.
 
-**tipoRima:**`string`  si riman tanto las vocales como las consonantes desde la silaba tónica es rima [consonante](https://es.wikipedia.org/wiki/Rima_consonante) , si solo riman las vocales es rima [asonante](https://es.wikipedia.org/wiki/Asonancia).
+**tipoRima:**`string`  si riman tanto las vocales como las consonantes desde la sílaba tónica, es rima [consonante](https://es.wikipedia.org/wiki/Rima_consonante), si solo riman las vocales, es rima [asonante](https://es.wikipedia.org/wiki/Asonancia).
 
 > **tipoRima:**`string` if both vowels and consonants rhyme from the stressed syllable it is consonant rhyme, if only vowels rhyme it is
 > assonance rhyme.
@@ -68,11 +68,11 @@ console.log(riman.analyze('programación', 'automatización'));
 
 > **palabra:**`string` the word entered in lowercase.
 
-**rimaConsonante:**`string` terminación de la palabra desde la sílaba tonica teniendo en cuenta consonantes y vocales.
+**rimaConsonante:**`string` terminación de la palabra desde la sílaba tónica teniendo en cuenta consonantes y vocales.
 
 > **rimaConsonante:**`string` word ending from the stressed syllable taking into account consonants and vowels.
 
-**rimaAsonante:**`string` terminación de la palabra desde la sílaba tonica teniendo en cuenta solo las vocales.
+**rimaAsonante:**`string` terminación de la palabra desde la sílaba tónica teniendo en cuenta solo las vocales.
 
 > **rimaAsonante:**`string` word ending from the stressed syllable taking into account only vowels. 
 
@@ -88,10 +88,10 @@ console.log(riman.analyze('programación', 'automatización'));
 
 > **silabas:**`array` word separated by syllables.
 
-**acentuacion:**`string`  indica si la palabra es Aguda, LLana o Esdrújula. Si la sílaba tónica es la última, la palabra es **Aguda** si es la penúltima es **LLana** y si es la antepenúltima es **Esdrújula**.
+**acentuacion:**`string`  indica si la palabra es Aguda, LLana o Esdrújula. Si la sílaba tónica es la última, la palabra es **Aguda**, si es la penúltima, es **LLana** y si es la antepenúltima, es **Esdrújula**.
 >**acentuacion:**`string` indicates if the word is Aguda, LLana or Esdrújula.  words stressed on the last syllable are **Aguda**, the penultimate syllable are **Llana**, and the antepenultimate syllable are **Esdrújula**. 
 
-**tonica:**`number` indica la posición de la sílaba que tiene el acento de la palabra, pero no necesariamente lleva tilde. Es decir la sílaba que pronunciamos con más fuerza.
+**tonica:**`number` indica la posición de la sílaba que tiene el acento de la palabra, pero no necesariamente lleva tilde. Es decir, la sílaba que pronunciamos con más fuerza.
 
 > **tonica:**`number` indicates syllable position that has the accent of the word, but does not necessarily have an accent mark. That is to say the stressed syllable.
 
