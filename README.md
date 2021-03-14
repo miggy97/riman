@@ -129,17 +129,17 @@ console.log(riman.analyzeWord("alienígena"));
 
 > **tonica:**`number` indicates syllable position that has the accent of the word, but does not necessarily have an accent mark. That is to say the stressed syllable.
 
-**EsPrimeraVocal**`boolean` indica si la primera letra de la palabra es vocal (útil para la métrica de versos)
+**EsPrimeraVocal:**`boolean` indica si la primera letra de la palabra es vocal (útil para la métrica de versos)
 
-> **EsPrimeraVocal**`boolean` indicates if the first letter of the word is a vowel (useful for verse metrics)
+> **EsPrimeraVocal:**`boolean` indicates if the first letter of the word is a vowel (useful for verse metrics)
 
-**EsUltimaVocal**`boolean` indica si la ultima letra de la palabra es vocal (útil para la métrica de versos)
+**EsUltimaVocal:**`boolean` indica si la ultima letra de la palabra es vocal (útil para la métrica de versos)
 
-> **EsUltimaVocal**`boolean` indicates if the last letter of the word is a vowel (useful for verse metrics)
+> **EsUltimaVocal:**`boolean` indicates if the last letter of the word is a vowel (useful for verse metrics)
 
-**EsPrimeraVocalTonica**`boolean` indica si la primera letra de la palabra es vocal y tónica (útil para la métrica de versos)
+**EsPrimeraVocalTonica:**`boolean` indica si la primera letra de la palabra es vocal y tónica (útil para la métrica de versos)
 
-> **EsPrimeraVocalTonica**`boolean` indicates if the first letter of the word is vowel and tonic or stressed (useful for the metric of verses)
+> **EsPrimeraVocalTonica:**`boolean` indicates if the first letter of the word is vowel and tonic or stressed (useful for the metric of verses)
 
 **hiato:**`array` muestra si hay dos vocales seguidas que están en diferentes sílabas.
 
