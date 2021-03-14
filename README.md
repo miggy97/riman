@@ -1,5 +1,7 @@
 # riman
+
 Comprueba si dos palabar en español **riman**.
+
 > Check if two words **rhyme** in Spanish.
 
 También te proporciona información relevante sobre las palabras como la rima asonante, la rima consonante, sílabas, la tónica...
@@ -10,13 +12,14 @@ También te proporciona información relevante sobre las palabras como la rima a
 
     npm install riman
 
-## Usage
+## Usage 1
+
 ```js
-const  riman = require('riman');
-console.log(riman.analyze('programación', 'automatización'));
+const riman = require("riman");
+console.log(riman.analyze("programación", "automatización"));
 ```
 
-## Result
+## Result 1
 
 ```js
 {
@@ -49,20 +52,50 @@ console.log(riman.analyze('programación', 'automatización'));
     triptongo: []
   }
 }
-```   
-    
+```
+
+## Usage 2
+
+```js
+const riman = require("riman");
+console.log(riman.analyzeWord("alienígena"));
+```
+
+## Result 1
+
+```js
+{
+  palabra: 'alienígena',
+  rimaConsonante: 'igena',
+  rimaAsonante: 'iea',
+  longitudPalabra: 10,
+  numSilabas: 5,
+  silabas: [ 'a', 'lie', 'ní', 'ge', 'na' ],
+  acentuacion: 'Esdrújula', // For example 'a-e' or 'i-a'
+  tonica: 3,
+  EsPrimeraVocal: true,
+  EsUltimaVocal: true,
+  EsPrimeraVocalTonica: false,
+  hiato: [], // For example 'a-e' or 'i-a'
+  diptongo: [ 'ie' ],
+  triptongo: []
+}
+```
+
 ## Values Definitions
-**riman:** `boolean`  identifica si las dos palabras introducidas riman.
 
-> **riman:** `boolean`  identify whether the two words entered rhyme.
+**riman:** `boolean` identifica si las dos palabras introducidas riman.
 
-**tipoRima:**`string`  si riman tanto las vocales como las consonantes desde la sílaba tónica, es rima [consonante](https://es.wikipedia.org/wiki/Rima_consonante), si solo riman las vocales, es rima [asonante](https://es.wikipedia.org/wiki/Asonancia).
+> **riman:** `boolean` identify whether the two words entered rhyme.
+
+**tipoRima:**`string` si riman tanto las vocales como las consonantes desde la sílaba tónica, es rima [consonante](https://es.wikipedia.org/wiki/Rima_consonante), si solo riman las vocales, es rima [asonante](https://es.wikipedia.org/wiki/Asonancia).
 
 > **tipoRima:**`string` if both vowels and consonants rhyme from the stressed syllable it is consonant rhyme, if only vowels rhyme it is
 > assonance rhyme.
 
 **palabraUno** y **palabraDos**: `object` contienen la información de las dos palabras.
->**palabraUno** y **palabraDos**: `object` they contain the information of the two words.
+
+> **palabraUno** y **palabraDos**: `object` they contain the information of the two words.
 
 **palabra:**`string` la palabra introducida en minúscula.
 
@@ -74,7 +107,7 @@ console.log(riman.analyze('programación', 'automatización'));
 
 **rimaAsonante:**`string` terminación de la palabra desde la sílaba tónica teniendo en cuenta solo las vocales.
 
-> **rimaAsonante:**`string` word ending from the stressed syllable taking into account only vowels. 
+> **rimaAsonante:**`string` word ending from the stressed syllable taking into account only vowels.
 
 **longitudPalabra:**`number` número de letras que tiene la palabra.
 
@@ -88,12 +121,25 @@ console.log(riman.analyze('programación', 'automatización'));
 
 > **silabas:**`array` word separated by syllables.
 
-**acentuacion:**`string`  indica si la palabra es Aguda, LLana o Esdrújula. Si la sílaba tónica es la última, la palabra es **Aguda**, si es la penúltima, es **LLana** y si es la antepenúltima, es **Esdrújula**.
->**acentuacion:**`string` indicates if the word is Aguda, LLana or Esdrújula.  words stressed on the last syllable are **Aguda**, the penultimate syllable are **Llana**, and the antepenultimate syllable are **Esdrújula**. 
+**acentuacion:**`string` indica si la palabra es Aguda, LLana o Esdrújula. Si la sílaba tónica es la última, la palabra es **Aguda**, si es la penúltima, es **LLana** y si es la antepenúltima, es **Esdrújula**.
+
+> **acentuacion:**`string` indicates if the word is Aguda, LLana or Esdrújula. words stressed on the last syllable are **Aguda**, the penultimate syllable are **Llana**, and the antepenultimate syllable are **Esdrújula**.
 
 **tonica:**`number` indica la posición de la sílaba que tiene el acento de la palabra, pero no necesariamente lleva tilde. Es decir, la sílaba que pronunciamos con más fuerza.
 
 > **tonica:**`number` indicates syllable position that has the accent of the word, but does not necessarily have an accent mark. That is to say the stressed syllable.
+
+**EsPrimeraVocal**`boolean` indica si la primera letra de la palabra es vocal (útil para la métrica de versos)
+
+> **EsPrimeraVocal**`boolean` indicates if the first letter of the word is a vowel (useful for verse metrics)
+
+**EsUltimaVocal**`boolean` indica si la ultima letra de la palabra es vocal (útil para la métrica de versos)
+
+> **EsUltimaVocal**`boolean` indicates if the last letter of the word is a vowel (useful for verse metrics)
+
+**EsPrimeraVocalTonica**`boolean` indica si la primera letra de la palabra es vocal y tónica (útil para la métrica de versos)
+
+> **EsPrimeraVocalTonica**`boolean` indicates if the first letter of the word is vowel and tonic or stressed (useful for the metric of verses)
 
 **hiato:**`array` muestra si hay dos vocales seguidas que están en diferentes sílabas.
 
@@ -108,6 +154,7 @@ console.log(riman.analyze('programación', 'automatización'));
 > **triptongo:**`array` shows if there are three vowels in a row on the same syllable (triphthong).
 
 ## Related
+
 He utilizado dos módulos de npm, **rimador** y **silabea**. Ambas librerías son **antiguas**, nadie las mantiene y tienen **errores**. He rehecho algunas de sus funcionalidades y las he **mejorado**.
 
 > I have used two npm modules, **rimador** and **silabea**. Both

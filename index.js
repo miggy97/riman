@@ -3,7 +3,7 @@ const silabea = require('silabea');
 
 function analyze(word1, word2) {
   //Validate word (Words have to be strings with only letters)
-  if( word1 === '' || word1 === undefined || word1 === null || word2 === '' || word2 === undefined || word2 === null){
+  if (word1 === '' || word1 === undefined || word1 === null || word2 === '' || word2 === undefined || word2 === null) {
     return 'you need to enter two words';
   }
   if (typeof word1 !== 'string' || typeof word2 !== 'string') return "word need to be a String";
@@ -44,15 +44,15 @@ function analyze(word1, word2) {
     },
   };
 
-  const rimaWor1 = rimador.analyze(word1);
-  const rimaWor2 = rimador.analyze(word2);
+  const rimaWord1 = rimador.analyze(word1);
+  const rimaWord2 = rimador.analyze(word2);
   const syllableWord1 = silabea.getSilabas(word1);
   const syllableWord2 = silabea.getSilabas(word2);
 
 
   /** Setting the info for the first word */
-  rimaInfo.palabraUno.rimaConsonante = rimaWor1.rhyme;
-  rimaInfo.palabraUno.rimaAsonante = rimaWor1.asonance;
+  rimaInfo.palabraUno.rimaConsonante = rimaWord1.rhyme;
+  rimaInfo.palabraUno.rimaAsonante = rimaWord1.asonance;
 
   // If the consonat rhyme is not foud just take the hole word
   if (rimaInfo.palabraUno.rimaConsonante === '') {
@@ -77,6 +77,14 @@ function analyze(word1, word2) {
 
   for (hiato of syllableWord1.hiato) {
     rimaInfo.palabraUno.hiato.push(hiato.silabaHiato);
+  }
+
+  //Fix word that ends with stressed 'uy'
+  let lastSyllable = rimaInfo.palabraUno.silabas[rimaInfo.palabraUno.silabas.length - 1];
+  if (lastSyllable.length >= 2 && lastSyllable[lastSyllable.length - 2] === 'u' &&
+    lastSyllable[lastSyllable.length - 1] === 'y' && rimaInfo.palabraUno.acentuacion === 'Aguda') {
+    rimaInfo.palabraUno.rimaConsonante = 'ui';
+    rimaInfo.palabraUno.rimaAsonante = 'ui';
   }
 
   // Find diptongos
@@ -147,8 +155,8 @@ function analyze(word1, word2) {
     }
   }
 
-  rimaInfo.palabraDos.rimaConsonante = rimaWor2.rhyme;
-  rimaInfo.palabraDos.rimaAsonante = rimaWor2.asonance;
+  rimaInfo.palabraDos.rimaConsonante = rimaWord2.rhyme;
+  rimaInfo.palabraDos.rimaAsonante = rimaWord2.asonance;
 
   // If the consonat rhyme is not foud just take the hole word
   if (rimaInfo.palabraDos.rimaConsonante === '') {
@@ -173,6 +181,14 @@ function analyze(word1, word2) {
 
   for (hiato of syllableWord2.hiato) {
     rimaInfo.palabraDos.hiato.push(hiato.silabaHiato);
+  }
+
+  //Fix word that ends with stressed 'uy'
+  lastSyllable = rimaInfo.palabraDos.silabas[rimaInfo.palabraDos.silabas.length - 1];
+  if (lastSyllable.length >= 2 && lastSyllable[lastSyllable.length - 2] === 'u' &&
+    lastSyllable[lastSyllable.length - 1] === 'y' && rimaInfo.palabraDos.acentuacion === 'Aguda') {
+    rimaInfo.palabraDos.rimaConsonante = 'ui';
+    rimaInfo.palabraDos.rimaAsonante = 'ui';
   }
 
   // Find diptongo
@@ -257,6 +273,159 @@ function analyze(word1, word2) {
   return rimaInfo;
 }
 
+function analyzeWord(word) {
+  //Validate word (Words have to be strings with only letters)
+  if (word === '' || word === undefined || word === null) {
+    return 'you need to enter a words';
+  }
+  if (typeof word !== 'string') return "word need to be a String";
+  if (!isOnlyLetters(word)) return "word can only contain letters";
+  //Transform to lowercase
+  word = word.toLowerCase();
+
+  const palabra = {
+    palabra: word,
+    rimaConsonante: '',
+    rimaAsonante: '',
+    longitudPalabra: null,
+    numSilabas: null,
+    silabas: [],
+    acentuacion: '', // Aguda, LLana o Esdrújula
+    tonica: null,
+    EsPrimeraVocal: false,
+    EsUltimaVocal: false,
+    EsPrimeraVocalTonica: false,
+    hiato: [],
+    diptongo: [],
+    triptongo: []
+  }
+
+  const rimaWord = rimador.analyze(word);
+  const syllableWord = silabea.getSilabas(word);
+
+  /** Setting the info for the first word */
+  palabra.rimaConsonante = rimaWord.rhyme;
+  palabra.rimaAsonante = rimaWord.asonance;
+
+  // If the consonat rhyme is not foud just take the hole word
+  if (palabra.rimaConsonante === '') {
+    palabra.rimaConsonante = word;
+  }
+
+  // If the asonace rhyme is not foud just get the vowels
+  if (palabra.rimaAsonante === '') {
+    palabra.rimaAsonante = word.match(/[AaEeIiOoUuÁáÉéÍíÓóÚúüÜ]/gi).join("");
+  }
+
+  palabra.longitudPalabra = syllableWord.longitudPalabra;
+  palabra.numSilabas = syllableWord.numeroSilaba;
+
+  // Push the syllables in an array
+  for (let i = 0; i < syllableWord.silabas.length; i++) {
+    palabra.silabas.push(syllableWord.silabas[i].silaba);
+  }
+
+  palabra.acentuacion = syllableWord.acentuacion;
+  palabra.tonica = syllableWord.tonica;
+
+  //Fix word that ends with stressed 'uy'
+  const lastSyllable = palabra.silabas[palabra.silabas.length - 1];
+  if (lastSyllable.length >= 2 && lastSyllable[lastSyllable.length - 2] === 'u' &&
+    lastSyllable[lastSyllable.length - 1] === 'y' && palabra.acentuacion === 'Aguda') {
+    palabra.rimaConsonante = 'ui';
+    palabra.rimaAsonante = 'ui';
+  }
+
+  for (hiato of syllableWord.hiato) {
+    palabra.hiato.push(hiato.silabaHiato);
+  }
+
+  // Check if first letter is a vowel
+  if (palabra.silabas[0][0].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜ]/gi) != null) {
+    palabra.EsPrimeraVocal = true;
+
+    //Check if the word starts with a vowel and is the stressed syllable
+    if (palabra.tonica === 1) {
+      palabra.EsPrimeraVocalTonica = true;
+    }
+  }
+
+  // Check if last letter is a vowel
+  if (word[word.length - 1].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜyY]/gi)) {
+    palabra.EsUltimaVocal = true;
+  }
+
+  // Find diptongos
+  for (silaba of palabra.silabas) {
+    let countVowelInRow = 0;
+    let firstVowel = false;
+    let diptongo = '';
+    if (!isEspecialNotDiptongo(silaba)) {
+      if (isEspecialDiptongo(silaba) !== false) {
+        countVowelInRow = 2;
+        diptongo = isEspecialDiptongo(silaba);
+      } else {
+        for (letra of silaba) {
+          if (!firstVowel) {
+            if (letra.match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜ]/gi) !== null) {
+              firstVowel = true;
+              diptongo += letra;
+              countVowelInRow++;
+            }
+          } else {
+            if (letra.match(/[AaÁáEeÉeIiÍíOoÓóUuÚúyYHhüÜ]/gi) !== null) {
+              if (letra === 'h' || letra === "H") {
+                diptongo += letra;
+              } else {
+                diptongo += letra;
+                countVowelInRow++;
+              }
+            } else break;
+          }
+        }
+      }
+    }
+    if (countVowelInRow === 2) {
+      palabra.diptongo.push(diptongo);
+    }
+  }
+
+  // Find triptongos
+  for (silaba of palabra.silabas) {
+    let countVowelInRow = 0;
+    let firstVowel = false;
+    let triptongo = '';
+    if (isEspecialTriptongo(silaba) !== false) {
+      countVowelInRow = 3;
+      triptongo = isEspecialTriptongo(silaba);
+    } else if (isEspecialDiptongo(silaba) === false) {
+      for (letra of silaba) {
+        if (!firstVowel) {
+          if (letra.match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜ]/gi) !== null) {
+            firstVowel = true;
+            triptongo += letra;
+            countVowelInRow++;
+          }
+        } else {
+          if (letra.match(/[AaÁáEeÉeIiÍíOoÓóUuÚúyYHhüÜ]/gi) !== null) {
+            if (letra === 'h' || letra === "H") {
+              triptongo += letra;
+            } else {
+              triptongo += letra;
+              countVowelInRow++;
+            }
+          } else break;
+        }
+      }
+    }
+    if (countVowelInRow === 3) {
+      palabra.triptongo.push(triptongo);
+    }
+  }
+
+  return palabra;
+}
+
 // To vocal syllables that are not diptongo
 function isEspecialNotDiptongo(syllable) {
   if (syllable === 'que' || syllable === 'qui' || syllable === 'gue' || syllable === 'gui') {
@@ -319,4 +488,7 @@ function isOnlyLetters(word) {
   return /^[A-zÀ-úñÑüÜ]+$/.test(word);
 }
 
-module.exports.analyze = analyze;
+module.exports = {
+  analyze: analyze,
+  analyzeWord: analyzeWord,
+};
