@@ -1,7 +1,7 @@
 {
   "name": "riman",
   "version": "1.0.0",
-  "description": "comprueba si dos palabras en español riman y te da infromación sobre ellas.",
+  "description": "checks if two words rhymes in spanish and more.",
   "main": "index.js",
   "dependencies": {
     "rimador": "^1.2.0",
