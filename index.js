@@ -3,8 +3,11 @@ const silabea = require('silabea');
 
 function analyze(word1, word2) {
   //Validate word (Words have to be strings with only letters)
-  if (typeof word1 !== 'string' || typeof word2 !== 'string') return "Las palabras tienen que ser un String";
-  if (!isOnlyLetters(word1) || !isOnlyLetters(word2)) return "Las palabras solo pueden contener letras";
+  if( word1 === '' || word1 === undefined || word1 === null || word2 === '' || word2 === undefined || word2 === null){
+    return 'you need to enter two words';
+  }
+  if (typeof word1 !== 'string' || typeof word2 !== 'string') return "word need to be a String";
+  if (!isOnlyLetters(word1) || !isOnlyLetters(word2)) return "word can only contain letters";
   //Transform to lowercase
   word1 = word1.toLowerCase();
   word2 = word2.toLowerCase();
