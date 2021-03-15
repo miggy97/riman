@@ -2,14 +2,14 @@
   "name": "riman",
   "version": "1.0.4",
   "description": "checks if two words rhymes in spanish and more.",
-  "main": "index.js",
-  "dependencies": {
-    "rimador": "^1.2.0",
-    "silabea": "^1.0.0"
-  },
-  "devDependencies": {},
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "mocha"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -17,14 +17,21 @@
   },
   "keywords": [
     "riman",
+    "rhyme",
     "rima",
+    "word",
     "palabra",
+    "spanish",
     "tilde",
     "verso",
     "metrica"
   ],
   "author": "miggy97",
   "license": "ISC",
+  "dependencies": {
+    "rimador": "^1.2.0",
+    "silabea": "^1.0.0"
+  },
   "bugs": {
     "url": "https://github.com/miggy97/riman/issues"
   },

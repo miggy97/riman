@@ -13,7 +13,11 @@ También te proporciona información relevante sobre las palabras como la rima a
     npm install riman
 
 ## Usage 1
-
+ES6
+```ts
+import * as riman from "riman";
+```
+OR
 ```js
 const riman = require("riman");
 console.log(riman.analyze("programación", "automatización"));
@@ -34,6 +38,9 @@ console.log(riman.analyze("programación", "automatización"));
     silabas: [ 'pro', 'gra', 'ma', 'ción' ],
     acentuacion: 'Aguda', // Aguda | Grave (Llana) | Esdrújula
     tonica: 4,
+    EsPrimeraVocal: false,
+    EsUltimaVocal: false,
+    EsPrimeraVocalTonica: false,
     hiato: [], // For example 'a-e' or 'i-a'
     diptongo: [ 'ió' ],
     triptongo: []
@@ -47,6 +54,9 @@ console.log(riman.analyze("programación", "automatización"));
     silabas: [ 'au', 'to', 'ma', 'ti', 'za', 'ción' ],
     acentuacion: 'Aguda', // Aguda | Grave (Llana) | Esdrújula
     tonica: 6,
+    EsPrimeraVocal: true,
+    EsUltimaVocal: false,
+    EsPrimeraVocalTonica: false,
     hiato: [], // For example 'a-e' or 'i-a'
     diptongo: [ 'au', 'ió' ],
     triptongo: []
@@ -55,7 +65,11 @@ console.log(riman.analyze("programación", "automatización"));
 ```
 
 ## Usage 2
-
+ES6
+```ts
+import * as riman from "riman";
+```
+OR
 ```js
 const riman = require("riman");
 console.log(riman.analyzeWord("alienígena"));
