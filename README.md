@@ -8,6 +8,11 @@ También te proporciona información relevante sobre las palabras como la rima a
 
 > It also provides you with relevant information about words such as assonance rhyme, consonant rhyme, syllables, stressed syllable...
 
+Aquí tienes una [DEMO](https://riman-4661f.web.app/) para que puedas probar algunas rimas.
+
+> Here is a [DEMO](https://riman-4661f.web.app/) so you can try some rhymes.
+
+
 # Install
 
     npm install riman

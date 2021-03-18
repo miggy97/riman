@@ -202,15 +202,19 @@ export function analyze(word1: string, word2: string): rimaInfo {
   );
 
   // Check if rhymes
-  if (rimaInfo.palabraUno.rimaConsonante === rimaInfo.palabraDos.rimaConsonante) {
+  if (
+    rimaInfo.palabraUno.rimaConsonante === rimaInfo.palabraDos.rimaConsonante
+  ) {
     rimaInfo.riman = true;
-    rimaInfo.tipoRima = 'consonante';
-  } else if (rimaInfo.palabraUno.rimaAsonante === rimaInfo.palabraDos.rimaAsonante) {
+    rimaInfo.tipoRima = "consonante";
+  } else if (
+    rimaInfo.palabraUno.rimaAsonante === rimaInfo.palabraDos.rimaAsonante
+  ) {
     rimaInfo.riman = true;
-    rimaInfo.tipoRima = 'asonante';
+    rimaInfo.tipoRima = "asonante";
   } else {
     rimaInfo.riman = false;
-    rimaInfo.tipoRima = 'ninguna';
+    rimaInfo.tipoRima = "ninguna";
   }
 
   return rimaInfo;
@@ -356,13 +360,35 @@ function findRowSyllabes(silabas: string[], amount: number): string[] {
 function isEspecialNotDiptongo(syllable: string): boolean {
   if (
     syllable === "que" ||
-    syllable === "qui" ||
-    syllable === "gue" ||
-    syllable === "gui"
+    (syllable.length > 3 &&
+      syllable.startsWith("que") &&
+      syllable[3].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúyYüÜ]/gi) === null)
   ) {
     return true;
+  } else if (
+    syllable === "qui" ||
+    (syllable.length > 3 &&
+      syllable.startsWith("qui") &&
+      syllable[3].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúyYüÜ]/gi) === null)
+  ) {
+    return true;
+  } else if (
+    syllable === "gue" ||
+    (syllable.length > 3 &&
+      syllable.startsWith("gue") &&
+      syllable[3].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúyYüÜ]/gi) === null)
+  ) {
+    return true;
+  } else if (
+    syllable === "gui" ||
+    (syllable.length > 3 &&
+      syllable.startsWith("gui") &&
+      syllable[3].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúyYüÜ]/gi) === null)
+  ) {
+    return true;
+  } else {
+    return false;
   }
-  return false;
 }
 
 // Returns the a diptongo of a syllable that start with que, qui, gue, gui, güi, güe
