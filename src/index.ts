@@ -61,13 +61,21 @@ export function analyze(word1: string, word2: string): rimaInfo {
 
   // If the consonat rhyme is not foud just take the hole word
   if (rimaInfo.palabraUno.rimaConsonante === "") {
-    rimaInfo.palabraUno.rimaConsonante = word1;
+    if (word1.endsWith("y")) {
+      rimaInfo.palabraUno.rimaConsonante = word1.slice(0, -1) + "i";
+    } else {
+      rimaInfo.palabraUno.rimaConsonante = word1;
+    }
   }
 
   // If the asonace rhyme is not foud just get the vowels
   if (rimaInfo.palabraUno.rimaAsonante === "") {
+    let transformedWord = word1;
+    if (word1.endsWith("y")) {
+      transformedWord = word1.slice(0, -1) + "i";
+    }
     rimaInfo.palabraUno.rimaAsonante =
-      word1.match(/[AaEeIiOoUuÁáÉéÍíÓóÚúüÜ]/gi)?.join("") ??
+      transformedWord.match(/[AaEeIiOoUuÁáÉéÍíÓóÚúüÜ]/gi)?.join("") ??
       "Sin rima asonante";
   }
 
@@ -134,13 +142,21 @@ export function analyze(word1: string, word2: string): rimaInfo {
 
   // If the consonat rhyme is not foud just take the hole word
   if (rimaInfo.palabraDos.rimaConsonante === "") {
-    rimaInfo.palabraDos.rimaConsonante = word2;
+    if (word2.endsWith("y")) {
+      rimaInfo.palabraDos.rimaConsonante = word2.slice(0, -1) + "i";
+    } else {
+      rimaInfo.palabraDos.rimaConsonante = word2;
+    }
   }
 
   // If the asonace rhyme is not foud just get the vowels
   if (rimaInfo.palabraDos.rimaAsonante === "") {
+    let transformedWord = word2;
+    if (word1.endsWith("y")) {
+      transformedWord = word2.slice(0, -1) + "i";
+    }
     rimaInfo.palabraDos.rimaAsonante =
-      word2.match(/[AaEeIiOoUuÁáÉéÍíÓóÚúüÜ]/gi)?.join("") ??
+      transformedWord.match(/[AaEeIiOoUuÁáÉéÍíÓóÚúüÜ]/gi)?.join("") ??
       "Sin rima asonante";
   }
 
@@ -256,13 +272,22 @@ export function analyzeWord(word: string): palabraInfo {
 
   // If the consonat rhyme is not foud just take the hole word
   if (palabra.rimaConsonante === "") {
-    palabra.rimaConsonante = word;
+    if (word.endsWith("y")) {
+      palabra.rimaConsonante = word.slice(0, -1) + "i";
+    } else {
+      palabra.rimaConsonante = word;
+    }
   }
 
   // If the asonace rhyme is not foud just get the vowels
   if (palabra.rimaAsonante === "") {
+    let transformedWord = word;
+    if (word.endsWith("y")) {
+      transformedWord = transformedWord.slice(0, -1) + "i";
+    }
     palabra.rimaAsonante =
-      word.match(/[AaEeIiOoUuÁáÉéÍíÓóÚúüÜ]/gi)?.join("") ?? "Sin rima asonante";
+      transformedWord.match(/[AaEeIiOoUuÁáÉéÍíÓóÚúüÜ]/gi)?.join("") ??
+      "Sin rima asonante";
   }
 
   palabra.longitudPalabra = syllableWord.longitudPalabra;
