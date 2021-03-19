@@ -103,6 +103,12 @@ export function analyze(word1: string, word2: string): rimaInfo {
     }
   }
 
+  // Especial case when Y is prounced as a I
+  if(rimaInfo.palabraUno.palabra === "y") {
+    rimaInfo.palabraUno.EsPrimeraVocal = true;
+    rimaInfo.palabraUno.EsPrimeraVocalTonica = true;
+  }
+
   // Check if last letter is a vowel
   if (word1[word1.length - 1].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜyY]/gi)) {
     rimaInfo.palabraUno.EsUltimaVocal = true;
@@ -182,6 +188,11 @@ export function analyze(word1: string, word2: string): rimaInfo {
     if (rimaInfo.palabraDos.tonica === 1) {
       rimaInfo.palabraDos.EsPrimeraVocalTonica = true;
     }
+  }
+  // Especial case when Y is prounced as a I
+  if(rimaInfo.palabraDos.palabra === "y") {
+    rimaInfo.palabraDos.EsPrimeraVocal = true;
+    rimaInfo.palabraDos.EsPrimeraVocalTonica = true;
   }
 
   // Check if last letter is a vowel
@@ -325,6 +336,11 @@ export function analyzeWord(word: string): palabraInfo {
     if (palabra.tonica === 1) {
       palabra.EsPrimeraVocalTonica = true;
     }
+  }
+
+  if(palabra.palabra === "y") {
+    palabra.EsPrimeraVocal = true;
+    palabra.EsPrimeraVocalTonica = true;
   }
 
   // Check if last letter is a vowel
