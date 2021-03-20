@@ -92,7 +92,7 @@ export function analyze(word1: string, word2: string): rimaInfo {
 
   // Check if first letter is a vowel
   if (
-    rimaInfo.palabraUno.silabas[0][0].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜ]/gi) !=
+    rimaInfo.palabraUno.silabas[0][0].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜhH]/gi) !=
     null
   ) {
     rimaInfo.palabraUno.EsPrimeraVocal = true;
@@ -179,7 +179,7 @@ export function analyze(word1: string, word2: string): rimaInfo {
 
   // Check if first letter is a vowel
   if (
-    rimaInfo.palabraDos.silabas[0][0].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜ]/gi) !=
+    rimaInfo.palabraDos.silabas[0][0].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜhH]/gi) !=
     null
   ) {
     rimaInfo.palabraDos.EsPrimeraVocal = true;
@@ -329,7 +329,7 @@ export function analyzeWord(word: string): palabraInfo {
   }
 
   // Check if first letter is a vowel
-  if (palabra.silabas[0][0].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜ]/gi) != null) {
+  if (palabra.silabas[0][0].match(/[AaÁáEeÉeIiÍíOoÓóUuÚúüÜhH]/gi) != null) {
     palabra.EsPrimeraVocal = true;
 
     //Check if the word starts with a vowel and is the stressed syllable

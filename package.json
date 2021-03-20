@@ -1,6 +1,6 @@
 {
   "name": "riman",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "checks if two words rhymes in spanish and more.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
