@@ -79,6 +79,32 @@ export function analyze(word1: string, word2: string): rimaInfo {
       "Sin rima asonante";
   }
 
+  //If rimaConsonate with "que" or "qui" transform to "ke" or "ki" and delete "u" from rimaAsonante
+  if (rimaInfo.palabraUno.rimaConsonante.indexOf("que") !== -1) {
+    rimaInfo.palabraUno.rimaConsonante = rimaInfo.palabraUno.rimaConsonante.replace(
+      "que",
+      "ke"
+    );
+    if (rimaInfo.palabraUno.rimaAsonante.indexOf("ue") !== -1) {
+      const uPosition = rimaInfo.palabraUno.rimaAsonante.indexOf("ue");
+      const aRima = rimaInfo.palabraUno.rimaAsonante;
+      rimaInfo.palabraUno.rimaAsonante =
+        aRima.slice(0, uPosition) + aRima.slice(uPosition + 1, aRima.length);
+    }
+  }
+  if (rimaInfo.palabraUno.rimaConsonante.indexOf("qui") !== -1) {
+    rimaInfo.palabraUno.rimaConsonante = rimaInfo.palabraUno.rimaConsonante.replace(
+      "qui",
+      "ki"
+    );
+    if (rimaInfo.palabraUno.rimaAsonante.indexOf("ui") !== -1) {
+      const uPosition = rimaInfo.palabraUno.rimaAsonante.indexOf("ui");
+      const aRima = rimaInfo.palabraUno.rimaAsonante;
+      rimaInfo.palabraUno.rimaAsonante =
+        aRima.slice(0, uPosition) + aRima.slice(uPosition + 1, aRima.length);
+    }
+  }
+
   rimaInfo.palabraUno.longitudPalabra = syllableWord1.longitudPalabra;
   rimaInfo.palabraUno.numSilabas = syllableWord1.numeroSilaba;
 
@@ -104,7 +130,7 @@ export function analyze(word1: string, word2: string): rimaInfo {
   }
 
   // Especial case when Y is prounced as a I
-  if(rimaInfo.palabraUno.palabra === "y") {
+  if (rimaInfo.palabraUno.palabra === "y") {
     rimaInfo.palabraUno.EsPrimeraVocal = true;
     rimaInfo.palabraUno.EsPrimeraVocalTonica = true;
   }
@@ -166,6 +192,32 @@ export function analyze(word1: string, word2: string): rimaInfo {
       "Sin rima asonante";
   }
 
+  //If rimaConsonate with "que" or "qui" transform to "ke" or "ki" and delete "u" from rimaAsonante
+  if (rimaInfo.palabraDos.rimaConsonante.indexOf("que") !== -1) {
+    rimaInfo.palabraDos.rimaConsonante = rimaInfo.palabraDos.rimaConsonante.replace(
+      "que",
+      "ke"
+    );
+    if (rimaInfo.palabraDos.rimaAsonante.indexOf("ue") !== -1) {
+      const uPosition = rimaInfo.palabraDos.rimaAsonante.indexOf("ue");
+      const aRima = rimaInfo.palabraDos.rimaAsonante;
+      rimaInfo.palabraDos.rimaAsonante =
+        aRima.slice(0, uPosition) + aRima.slice(uPosition + 1, aRima.length);
+    }
+  }
+  if (rimaInfo.palabraDos.rimaConsonante.indexOf("qui") !== -1) {
+    rimaInfo.palabraDos.rimaConsonante = rimaInfo.palabraDos.rimaConsonante.replace(
+      "qui",
+      "ki"
+    );
+    if (rimaInfo.palabraDos.rimaAsonante.indexOf("ui") !== -1) {
+      const uPosition = rimaInfo.palabraDos.rimaAsonante.indexOf("ui");
+      const aRima = rimaInfo.palabraDos.rimaAsonante;
+      rimaInfo.palabraDos.rimaAsonante =
+        aRima.slice(0, uPosition) + aRima.slice(uPosition + 1, aRima.length);
+    }
+  }
+
   rimaInfo.palabraDos.longitudPalabra = syllableWord2.longitudPalabra;
   rimaInfo.palabraDos.numSilabas = syllableWord2.numeroSilaba;
 
@@ -190,7 +242,7 @@ export function analyze(word1: string, word2: string): rimaInfo {
     }
   }
   // Especial case when Y is prounced as a I
-  if(rimaInfo.palabraDos.palabra === "y") {
+  if (rimaInfo.palabraDos.palabra === "y") {
     rimaInfo.palabraDos.EsPrimeraVocal = true;
     rimaInfo.palabraDos.EsPrimeraVocalTonica = true;
   }
@@ -301,6 +353,32 @@ export function analyzeWord(word: string): palabraInfo {
       "Sin rima asonante";
   }
 
+  //If rimaConsonate with "que" or "qui" transform to "ke" or "ki" and delete "u" from rimaAsonante
+if (palabra.rimaConsonante.indexOf("que") !== -1) {
+    palabra.rimaConsonante = palabra.rimaConsonante.replace(
+      "que",
+      "ke"
+    );
+    if (palabra.rimaAsonante.indexOf("ue") !== -1) {
+      const uPosition = palabra.rimaAsonante.indexOf("ue");
+      const aRima = palabra.rimaAsonante;
+      palabra.rimaAsonante =
+        aRima.slice(0, uPosition) + aRima.slice(uPosition + 1, aRima.length);
+    }
+  }
+  if (palabra.rimaConsonante.indexOf("qui") !== -1) {
+    palabra.rimaConsonante = palabra.rimaConsonante.replace(
+      "qui",
+      "ki"
+    );
+    if (palabra.rimaAsonante.indexOf("ui") !== -1) {
+      const uPosition = palabra.rimaAsonante.indexOf("ui");
+      const aRima = palabra.rimaAsonante;
+      palabra.rimaAsonante =
+        aRima.slice(0, uPosition) + aRima.slice(uPosition + 1, aRima.length);
+    }
+  }
+
   palabra.longitudPalabra = syllableWord.longitudPalabra;
   palabra.numSilabas = syllableWord.numeroSilaba;
 
@@ -338,7 +416,7 @@ export function analyzeWord(word: string): palabraInfo {
     }
   }
 
-  if(palabra.palabra === "y") {
+  if (palabra.palabra === "y") {
     palabra.EsPrimeraVocal = true;
     palabra.EsPrimeraVocalTonica = true;
   }
