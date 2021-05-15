@@ -7,6 +7,11 @@ export function analyze(word1: string, word2: string): rimaInfo {
   if (word1 === "" || word2 === "") {
     throw new Error("you need to enter two words");
   }
+
+  //Clear punctuation marks
+  word1 = clearPunctuationMarks(word1);
+  word2 = clearPunctuationMarks(word2);
+
   //Check if words have characters that are not letters
   if (!isOnlyLetters(word1) || !isOnlyLetters(word2))
     throw new Error("A word can only contain letters");
@@ -81,10 +86,8 @@ export function analyze(word1: string, word2: string): rimaInfo {
 
   //If rimaConsonate with "que" or "qui" transform to "ke" or "ki" and delete "u" from rimaAsonante
   if (rimaInfo.palabraUno.rimaConsonante.indexOf("que") !== -1) {
-    rimaInfo.palabraUno.rimaConsonante = rimaInfo.palabraUno.rimaConsonante.replace(
-      "que",
-      "ke"
-    );
+    rimaInfo.palabraUno.rimaConsonante =
+      rimaInfo.palabraUno.rimaConsonante.replace("que", "ke");
     if (rimaInfo.palabraUno.rimaAsonante.indexOf("ue") !== -1) {
       const uPosition = rimaInfo.palabraUno.rimaAsonante.indexOf("ue");
       const aRima = rimaInfo.palabraUno.rimaAsonante;
@@ -93,10 +96,8 @@ export function analyze(word1: string, word2: string): rimaInfo {
     }
   }
   if (rimaInfo.palabraUno.rimaConsonante.indexOf("qui") !== -1) {
-    rimaInfo.palabraUno.rimaConsonante = rimaInfo.palabraUno.rimaConsonante.replace(
-      "qui",
-      "ki"
-    );
+    rimaInfo.palabraUno.rimaConsonante =
+      rimaInfo.palabraUno.rimaConsonante.replace("qui", "ki");
     if (rimaInfo.palabraUno.rimaAsonante.indexOf("ui") !== -1) {
       const uPosition = rimaInfo.palabraUno.rimaAsonante.indexOf("ui");
       const aRima = rimaInfo.palabraUno.rimaAsonante;
@@ -194,10 +195,8 @@ export function analyze(word1: string, word2: string): rimaInfo {
 
   //If rimaConsonate with "que" or "qui" transform to "ke" or "ki" and delete "u" from rimaAsonante
   if (rimaInfo.palabraDos.rimaConsonante.indexOf("que") !== -1) {
-    rimaInfo.palabraDos.rimaConsonante = rimaInfo.palabraDos.rimaConsonante.replace(
-      "que",
-      "ke"
-    );
+    rimaInfo.palabraDos.rimaConsonante =
+      rimaInfo.palabraDos.rimaConsonante.replace("que", "ke");
     if (rimaInfo.palabraDos.rimaAsonante.indexOf("ue") !== -1) {
       const uPosition = rimaInfo.palabraDos.rimaAsonante.indexOf("ue");
       const aRima = rimaInfo.palabraDos.rimaAsonante;
@@ -206,10 +205,8 @@ export function analyze(word1: string, word2: string): rimaInfo {
     }
   }
   if (rimaInfo.palabraDos.rimaConsonante.indexOf("qui") !== -1) {
-    rimaInfo.palabraDos.rimaConsonante = rimaInfo.palabraDos.rimaConsonante.replace(
-      "qui",
-      "ki"
-    );
+    rimaInfo.palabraDos.rimaConsonante =
+      rimaInfo.palabraDos.rimaConsonante.replace("qui", "ki");
     if (rimaInfo.palabraDos.rimaAsonante.indexOf("ui") !== -1) {
       const uPosition = rimaInfo.palabraDos.rimaAsonante.indexOf("ui");
       const aRima = rimaInfo.palabraDos.rimaAsonante;
@@ -304,6 +301,7 @@ export function analyzeWord(word: string): palabraInfo {
   if (word === "") {
     throw new Error("you need to enter a word");
   }
+  word = clearPunctuationMarks(word);
   //Check if words have characters that are not letters
   if (!isOnlyLetters(word)) throw new Error("A word can only contain letters");
   //Transform to lowercase
@@ -354,11 +352,8 @@ export function analyzeWord(word: string): palabraInfo {
   }
 
   //If rimaConsonate with "que" or "qui" transform to "ke" or "ki" and delete "u" from rimaAsonante
-if (palabra.rimaConsonante.indexOf("que") !== -1) {
-    palabra.rimaConsonante = palabra.rimaConsonante.replace(
-      "que",
-      "ke"
-    );
+  if (palabra.rimaConsonante.indexOf("que") !== -1) {
+    palabra.rimaConsonante = palabra.rimaConsonante.replace("que", "ke");
     if (palabra.rimaAsonante.indexOf("ue") !== -1) {
       const uPosition = palabra.rimaAsonante.indexOf("ue");
       const aRima = palabra.rimaAsonante;
@@ -367,10 +362,7 @@ if (palabra.rimaConsonante.indexOf("que") !== -1) {
     }
   }
   if (palabra.rimaConsonante.indexOf("qui") !== -1) {
-    palabra.rimaConsonante = palabra.rimaConsonante.replace(
-      "qui",
-      "ki"
-    );
+    palabra.rimaConsonante = palabra.rimaConsonante.replace("qui", "ki");
     if (palabra.rimaAsonante.indexOf("ui") !== -1) {
       const uPosition = palabra.rimaAsonante.indexOf("ui");
       const aRima = palabra.rimaAsonante;
@@ -584,6 +576,24 @@ function isEspecialTriptongo(syllable: string): string {
   } else {
     return "";
   }
+}
+
+function clearPunctuationMarks(word: string): string {
+  let cleanWord = word.split("");
+  if (cleanWord[0].match(/[¿¡"(-]/gi) !== null) {
+    cleanWord.splice(0, 1);
+  }
+  if (
+    cleanWord.length > 3 &&
+    cleanWord[cleanWord.length - 3] === "." &&
+    cleanWord[cleanWord.length - 2] === "." &&
+    cleanWord[cleanWord.length - 1] === "."
+  ) {
+    cleanWord.splice(cleanWord.length - 3, 3);
+  } else if (cleanWord[cleanWord.length - 1].match(/[?!").,:;]/gi) !== null) {
+    cleanWord.splice(cleanWord.length - 1, 1);
+  }
+  return cleanWord.join("");
 }
 
 function isOnlyLetters(word: string): boolean {
